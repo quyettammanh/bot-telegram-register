@@ -10,7 +10,7 @@ def main():
     # # In kết quả
     if urls:
         url=urls[0]
-        message='Goethe hiện link đăng ký ~ Vũ Quang Cường: 0354449090\n'+url
+        message='Github-Action - Goethe hiện link đăng ký ~ Vũ Quang Cường: 0354449090\n'+url
         print(message)
         send_telegram_message(message)
     else:
