@@ -1,21 +1,30 @@
 from func import check_url_register
 from bot_tele import send_telegram_message
+from dict_api import dict_api_url
+import time
+from datetime import datetime
+
 
 def main():
-    # Định nghĩa API mẫu (thay bằng URL API thực tế của bạn)
-    api_url = "https://www.goethe.de/rest/examfinder/exams/institute/O%2010000610?category=E015&type=JU&countryIsoCode=vn&locationName=&count=10&start=1&langId=134&timezone=54&isODP=0&sortField=startDate&sortOrder=ASC&dataMode=0&langIsoCodes=de%2Cen%2Cvi"
-    
-    # Gọi hàm check_url_register
+    current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    key = "hanoi_b1"
+    api_url = dict_api_url[key]
     urls = check_url_register(api_url)
-    # # In kết quả
     if urls:
-        url=urls[0]
-        message='Github-Action - Goethe hiện link đăng ký ~ Vũ Quang Cường: 0354449090\n'+url
-        print(message)
-        send_telegram_message(message)
+        url = urls[0]
+        message = (
+            "Github Action - Goethe hiện link đăng ký ~ Vũ Quang Cường: 0354449090\n"
+            + url
+        )
+        message_with_time = f"{message} - {current_time}"
+        send_telegram_message(message_with_time)
     else:
-        print("Không tìm thấy URL đăng ký hoặc có lỗi xảy ra.")
+        message = (
+            "Github Action - Không tìm thấy link đăng ký ~ Vũ Quang Cường: 0354449090\n"
+        )
+        message_with_time = f"{message} - {current_time}"
+        send_telegram_message(message_with_time)
 
-# Gọi hàm main để chạy chương trình
+
 if __name__ == "__main__":
     main()
