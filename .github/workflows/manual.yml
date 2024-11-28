@@ -27,6 +27,13 @@ jobs:
       group: ${{ github.ref }}
       cancel-in-progress: false  # Avoid canceling in-progress jobs
     steps:
+      - name: Set timezone to Vietnam (UTC+7)
+        run: |
+          sudo timedatectl set-timezone Asia/Ho_Chi_Minh
+          
+      - name: Verify the timezone
+        run: |
+          date
       - uses: actions/checkout@v2
       - name: Set up Python
         uses: actions/setup-python@v2
